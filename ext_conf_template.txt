@@ -1,0 +1,2 @@
+# cat=basic/enable/010; type=input; label=Placeholder Configuration File
+configurationFile = EXT:placeholder/Configuration/Yaml/PlaceholderSetup.yaml

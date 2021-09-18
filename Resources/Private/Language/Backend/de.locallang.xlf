@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2021-09-27T00:00:00Z" product-name="placeholder">
+		<header />
+		<body>
+			<trans-unit id="show-placeholder">
+				<source>Show placeholder content</source>
+				<target>Platzhalter Inhalt anzeigen</target>
+			</trans-unit>
+			<trans-unit id="hide-placeholder">
+				<source>Hide placeholder content</source>
+				<target>Platzhalter Inhalt verstecken</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

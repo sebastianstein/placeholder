@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  SebastianStein\Placeholder\:
+    resource: '../Classes/*'
+
+  SebastianStein\Placeholder\Event\TcaCompilation:
+    tags:
+      - name: event.listener
+        identifier: 'placeholder/setPlaceholderFieldsInTca'
+        method: 'setPlaceholderFieldsInTca'
+        event: TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent

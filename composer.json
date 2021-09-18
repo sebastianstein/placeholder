@@ -1,0 +1,22 @@
+{
+  "name": "sebastianstein/placeholder",
+  "description": "",
+  "authors": [
+    {
+      "name": "Sebastian Stein",
+      "email": "sebastian.stein@in2code.de"
+    }
+  ],
+  "type": "typo3-cms-extension",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "typo3/cms-core": "^10.4",
+    "php": ">=7.2.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SebastianStein\\Placeholder\\": "Classes"
+    }
+  }
+}
