@@ -24,9 +24,6 @@ return [
             'endtime' => 'endtime',
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => '',
-    ],
     'types' => [
         '0' => [
             'showitem' => 'marker_identifier, description, value'
