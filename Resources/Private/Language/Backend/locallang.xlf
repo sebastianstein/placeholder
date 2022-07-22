@@ -3,6 +3,9 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2021-09-27T00:00:00Z" product-name="placeholder">
 		<header />
 		<body>
+			<trans-unit id="tx_placeholder_domain_model_placeholder">
+				<source>Placeholder</source>
+			</trans-unit>
 			<trans-unit id="show-placeholder">
 				<source>Show placeholder content</source>
 			</trans-unit>
