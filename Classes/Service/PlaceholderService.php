@@ -9,6 +9,7 @@ use Psr\Log\LoggerAwareTrait;
 use SebastianStein\Placeholder\Domain\Model\Placeholder;
 use SebastianStein\Placeholder\Utility\DatabaseUtility;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

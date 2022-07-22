@@ -1,0 +1,16 @@
+imports:
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Default.yaml" }
+
+processing:
+  allowAttributes: [ class, id, title, dir, lang, xml:lang, itemscope, itemtype, itemprop, data-placeholder ]
+
+editor:
+  externalPlugins:
+    placeholder:
+      resource: "EXT:placeholder/Resources/Public/JavaScript/Backend/CkEditor/placeholder/plugin.js"
+
+  config:
+    contentsCss: [ "EXT:placeholder/Resources/Public/Css/Backend/backend.css" ]
+    extraAllowedContent: "*(*)[data-*]; span(placeholder-green,placeholder-red)"
+    extraPlugins:
+      - placeholder

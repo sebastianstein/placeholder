@@ -1,9 +1,11 @@
 placeholder:
+  ckEditorPreset: placeholder
   fieldConfiguration:
     tt_content:
       textmedia:
         - header
         - subheader
+        - bodytext
       text:
         - header
     tx_in2studyfinder_domain_model_studycourse:

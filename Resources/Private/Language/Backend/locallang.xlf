@@ -9,6 +9,44 @@
 			<trans-unit id="hide-placeholder">
 				<source>Hide placeholder content</source>
 			</trans-unit>
+			<trans-unit id="TCA.placeholder.marker_identifier">
+				<source>Identifier</source>
+			</trans-unit>
+			<trans-unit id="TCA.placeholder.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="TCA.placeholder.value">
+				<source>Value</source>
+			</trans-unit>
+
+			<trans-unit id="TCA.placeholder.marker_identifier">
+				<source>Identifier</source>
+			</trans-unit>
+			<trans-unit id="TCA.placeholder.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="TCA.placeholder.value">
+				<source>Value</source>
+			</trans-unit>
+
+			<trans-unit id="error.marker.invalidName.title">
+				<source>The given placeholder name is not valid!</source>
+			</trans-unit>
+			<trans-unit id="error.marker.invalidName.message">
+				<source>Entry contains invalid characters! Only capital letters "A-Z", "0-9" and "-+" allowed. The correct syntax is ###MY-PLACEHOLDER###</source>
+			</trans-unit>
+			<trans-unit id="error.marker.invalidSyntax.title">
+				<source>Paceholder syntax not valid</source>
+			</trans-unit>
+			<trans-unit id="error.marker.invalidSyntax.message">
+				<source>The first three and last three characters must be '#' (e.g. ###MY-PLACEHOLDER###)</source>
+			</trans-unit>
+			<trans-unit id="error.marker.identifierNotUnique.title">
+				<source>Not Unique</source>
+			</trans-unit>
+			<trans-unit id="error.marker.identifierNotUnique.message">
+				<source>The placeholder dose already exist</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

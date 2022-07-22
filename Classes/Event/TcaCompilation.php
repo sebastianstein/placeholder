@@ -57,17 +57,33 @@ class TcaCompilation implements LoggerAwareInterface
 
     private function updateTcaField(string $field, string $table, &$tca, $tcaType = null): void
     {
+
         if (array_key_exists($field, $tca[$table]['columns'])) {
-            if ($tca[$table]['columns'][$field]['config']['type'] === 'input') {
-                if (!is_null($tcaType)) {
-                    $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['type'] = 'user';
-                    $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['renderType'] = 'placeholder';
-                } else {
-                    $tca[$table]['columns'][$field]['config']['type'] = 'user';
-                    $tca[$table]['columns'][$field]['config']['renderType'] = 'placeholder';
-                }
-            } else {
-                $this->logger->error('wrong TCA type for field ' . $field . ' in table ' . $table);
+            $type = $tca[$table]['columns'][$field]['config']['type'];
+
+            switch ($type) {
+                case 'text':
+                    if ($tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['enableRichtext'] ||
+                        $tca[$table]['columns'][$field]['config']['enableRichtext']) {
+                        // RTE
+                           $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['richtextConfiguration'] = $this->placeholderConfigurationUtility->getCkEditorPreset();
+                    } else {
+                        // Textarea
+                    }
+                    break;
+                case 'input':
+                    if (!is_null($tcaType)) {
+                        $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['type'] = 'user';
+                        $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['renderType'] =
+                            'placeholderInput';
+                    } else {
+                        $tca[$table]['columns'][$field]['config']['type'] = 'user';
+                        $tca[$table]['columns'][$field]['config']['renderType'] = 'placeholderInput';
+                    }
+                    break;
+                default:
+                    $this->logger->error('wrong TCA type for field ' . $field . ' in table ' . $table);
+                    break;
             }
         } else {
             $this->logger->error(

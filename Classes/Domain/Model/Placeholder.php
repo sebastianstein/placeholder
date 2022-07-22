@@ -8,7 +8,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Placeholder extends AbstractEntity
 {
-    const TABLE = 'tx_placeholder_domain_model_placeholder';
+    public const TABLE = 'tx_placeholder_domain_model_placeholder';
 
     protected $markerIdentifier = '';
     protected $description = '';

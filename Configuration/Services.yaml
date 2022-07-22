@@ -7,9 +7,19 @@ services:
   SebastianStein\Placeholder\:
     resource: '../Classes/*'
 
+  SebastianStein\Placeholder\Controller\PlaceholderController:
+    public: true
+
   SebastianStein\Placeholder\Event\TcaCompilation:
     tags:
       - name: event.listener
         identifier: 'placeholder/setPlaceholderFieldsInTca'
         method: 'setPlaceholderFieldsInTca'
         event: TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent
+
+  SebastianStein\Placeholder\Event\ModifyResultAfterFetchingObjectData:
+    tags:
+      - name: event.listener
+        identifier: 'placeholder/replacePlaceholder'
+        method: 'replacePlaceholder'
+        event: TYPO3\CMS\Extbase\Event\Persistence\ModifyResultAfterFetchingObjectDataEvent

@@ -41,6 +41,22 @@ class PlaceholderConfigurationUtility implements LoggerAwareInterface
         return [];
     }
 
+    public function getCkEditorPreset(): string
+    {
+        $configuration = $this->getPlaceholderConfiguration();
+
+        if (array_key_exists('placeholder', $configuration)) {
+            if (array_key_exists('ckEditorPreset', $configuration['placeholder'])) {
+                return $configuration['placeholder']['ckEditorPreset'];
+            }
+            $this->logger->error('Placeholder configuration is missing ckEditorPreset key');
+        } else {
+            $this->logger->error('Placeholder configuration is missing placeholder key');
+        }
+
+        return 'placeholder';
+    }
+
     /**
      * @return array
      */
@@ -56,6 +72,24 @@ class PlaceholderConfigurationUtility implements LoggerAwareInterface
             $this->logger->error('Placeholder configuration is missing fieldConfiguration key');
         } else {
             $this->logger->error('Placeholder configuration is missing placeholder key');
+        }
+
+        return [];
+    }
+
+    public function existPlaceholderFieldConfigurationKey(string $key): bool
+    {
+        if (array_key_exists($key, $this->getPlaceholderFieldConfiguration())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getPlaceholderFieldConfigurationByKey(string $key): array
+    {
+        if ($this->existPlaceholderFieldConfigurationKey($key)) {
+            return $this->getPlaceholderFieldConfiguration()[$key];
         }
 
         return [];

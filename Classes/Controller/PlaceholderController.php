@@ -6,10 +6,8 @@ namespace SebastianStein\Placeholder\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use SebastianStein\Placeholder\Domain\Model\Placeholder;
 use SebastianStein\Placeholder\Domain\Repository\PlaceholderRepository;
 use TYPO3\CMS\Core\Http\JsonResponse;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PlaceholderController
 {
@@ -18,15 +16,9 @@ class PlaceholderController
      */
     private $placeholderRepository;
 
-    public function __construct()
+    public function __construct(PlaceholderRepository $placeholderRepository)
     {
-        $this->placeholderRepository = GeneralUtility::makeInstance(PlaceholderRepository::class);
-    }
-
-    public function ajaxExistPlaceholder(ServerRequestInterface $request): ResponseInterface
-    {
-        $result = [true];
-        return new JsonResponse($result);
+        $this->placeholderRepository = $placeholderRepository;
     }
 
     public function ajaxGetAllPlaceholder(ServerRequestInterface $request): ResponseInterface
@@ -37,7 +29,6 @@ class PlaceholderController
 
         $allPlaceholder = $this->placeholderRepository->getAllPlaceholder($language);
 
-        /** @var Placeholder $placeholder */
         foreach ($allPlaceholder as $placeholder) {
             $response[$placeholder->getMarkerIdentifier()] = $placeholder->toArray();
         }

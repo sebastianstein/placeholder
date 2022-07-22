@@ -11,6 +11,43 @@
 				<source>Hide placeholder content</source>
 				<target>Platzhalter Inhalt verstecken</target>
 			</trans-unit>
+			<trans-unit id="TCA.placeholder.marker_identifier">
+				<source>Identifier</source>
+				<target>Marker Name</target>
+			</trans-unit>
+			<trans-unit id="TCA.placeholder.description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="TCA.placeholder.value">
+				<source>Value</source>
+				<target>Inhalt</target>
+			</trans-unit>
+
+			<trans-unit id="error.marker.invalidName.title">
+				<source>The given placeholder name is not valid!</source>
+				<target>Der Platzhalter Name ist nicht gültig!</target>
+			</trans-unit>
+			<trans-unit id="error.marker.invalidName.message">
+				<source>Entry contains invalid characters! Only capital letters "A-Z", "0-9" and "-+" allowed. The correct syntax is ###MY-PLACEHOLDER###</source>
+				<target>Die Eingabe enthält nicht erlaubte Zeichen! Nur Großbuchstaben „A-Z“, „0-9“ und „-+“ sind erlaubt. Die korrekte Schreibweise lautet ###MEIN-PLATZHALTER###</target>
+			</trans-unit>
+			<trans-unit id="error.marker.invalidSyntax.title">
+				<source>Paceholder syntax not valid</source>
+				<target>Platzhalter Syntax nicht gültig</target>
+			</trans-unit>
+			<trans-unit id="error.marker.invalidSyntax.message">
+				<source>The first three and last three characters must be '#' (e.g. ###MY-PLACEHOLDER###)</source>
+				<target>Die ersten und letzten drei Zeichen müssen „#“ sein (z.B. ###MEIN-PLATZHALTER###) </target>
+			</trans-unit>
+			<trans-unit id="error.marker.identifierNotUnique.title">
+				<source>Not Unique</source>
+				<target>Name nicht einzigartig</target>
+			</trans-unit>
+			<trans-unit id="error.marker.identifierNotUnique.message">
+				<source>The placeholder dose already exist</source>
+				<target>Der angegebene Platzhalter existiert bereits</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -17,6 +17,31 @@
   height: 32px;
 }
 
+.placeholder-green {
+  color: green;
+}
+
+.placeholder-red {
+  color: red;
+}
+
+div.placeholder-autocomplete-results {
+  border: 1px dotted #ccc;
+  padding: 3px;
+}
+.placeholder-autocomplete-results ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.placeholder-autocomplete-results ul li {
+  padding: 5px 0;
+}
+.placeholder-autocomplete-results ul li:hover {
+  background: #eee;
+}
+
 /* THE OVERLAYING CONTENTEDITABLE WITH TRANSPARENT TEXT */
 .placeholder-group > div:nth-child(2) {
   position: relative;
@@ -24,6 +49,3 @@
   text-fill-color: transparent;
   color: black;
 }
-
-.hl_angled{ color: turquoise; }
-.hl_curly{ color: fuchsia; }

@@ -7,10 +7,15 @@ if (!defined('TYPO3_MODE')) {
 call_user_func(
     function () {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1612391583] = [
-            'nodeName' => 'placeholder',
+            'nodeName' => 'placeholderInput',
             'priority' => 40,
-            'class' => \SebastianStein\Placeholder\Form\Element\PlaceholderElement::class,
+            'class' => \SebastianStein\Placeholder\FormEngine\Element\PlaceholderInputElement::class,
         ];
+//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1612391584] = [
+//            'nodeName' => 'placeholderText',
+//            'priority' => 40,
+//            'class' => \SebastianStein\Placeholder\FormEngine\Element\PlaceholderTextElement::class,
+//        ];
 
         /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
         $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
@@ -22,11 +27,11 @@ call_user_func(
             ['source' => 'EXT:placeholder/Resources/Public/Images/Icons/hide.svg']
         );
 
-        // @todo if use ckeditor plugin
-        $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['default'] =
-            'EXT:placeholder/Configuration/Yaml/CkEditor/Default.yaml';
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\SebastianStein\Placeholder\FormEngine\Evaluation\UniqueMarker::class] =
+            '';
 
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['placeholder']['configuration'] =
-            'EXT:placeholder/Configuration/Yaml/Placeholder/Default.yaml';
+        // @todo feature switch
+        $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['placeholder'] =
+            'EXT:placeholder/Configuration/Yaml/CkEditor/Placeholder.yaml';
     }
 );
