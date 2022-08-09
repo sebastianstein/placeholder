@@ -17,43 +17,30 @@ class PlaceholderConfigurationUtility implements LoggerAwareInterface
     use LoggerAwareTrait;
 
     /**
+     * @var array
+     */
+    private $configuration;
+
+    public function __construct()
+    {
+        $this->configuration = $this->setPlaceholderConfiguration();
+    }
+
+    /**
      * @return array
      */
     public function getPlaceholderConfiguration(): array
     {
-        try {
-            $configurationFile = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(
-                'placeholder',
-                'configurationFile'
-            );
-            $fileLoader = GeneralUtility::makeInstance(YamlFileLoader::class);
-            return $fileLoader->load($configurationFile);
-        } catch (ExtensionConfigurationExtensionNotConfiguredException $e) {
-            $this->logger->error(
-                'No extension configuration for extension placeholder found'
-            );
-        } catch (ExtensionConfigurationPathDoesNotExistException $e) {
-            $this->logger->error(
-                'Extension path for placeholder not found'
-            );
-        }
-
-        return [];
+        return $this->configuration;
     }
 
     public function getCkEditorPreset(): string
     {
-        $configuration = $this->getPlaceholderConfiguration();
-
-        if (array_key_exists('placeholder', $configuration)) {
-            if (array_key_exists('ckEditorPreset', $configuration['placeholder'])) {
-                return $configuration['placeholder']['ckEditorPreset'];
-            }
-            $this->logger->error('Placeholder configuration is missing ckEditorPreset key');
-        } else {
-            $this->logger->error('Placeholder configuration is missing placeholder key');
+        if (array_key_exists('ckEditorPreset', $this->configuration['placeholder'])) {
+            return $this->configuration['placeholder']['ckEditorPreset'];
         }
 
+        $this->logger->error('Placeholder configuration is missing ckEditorPreset key');
         return 'placeholder';
     }
 
@@ -62,18 +49,11 @@ class PlaceholderConfigurationUtility implements LoggerAwareInterface
      */
     public function getPlaceholderFieldConfiguration(): array
     {
-        $configuration = $this->getPlaceholderConfiguration();
-
-        if (array_key_exists('placeholder', $configuration)) {
-            if (array_key_exists('fieldConfiguration', $configuration['placeholder'])) {
-                return $configuration['placeholder']['fieldConfiguration'];
-            }
-
-            $this->logger->error('Placeholder configuration is missing fieldConfiguration key');
-        } else {
-            $this->logger->error('Placeholder configuration is missing placeholder key');
+        if (array_key_exists('fieldConfiguration', $this->configuration['placeholder'])) {
+            return $this->configuration['placeholder']['fieldConfiguration'];
         }
 
+        $this->logger->error('Placeholder configuration is missing fieldConfiguration key');
         return [];
     }
 
@@ -90,6 +70,47 @@ class PlaceholderConfigurationUtility implements LoggerAwareInterface
     {
         if ($this->existPlaceholderFieldConfigurationKey($key)) {
             return $this->getPlaceholderFieldConfiguration()[$key];
+        }
+
+        return [];
+    }
+
+    public function isTcaTypePlaceholderEnabled(): bool
+    {
+        return array_key_exists('enableTcaTypePlaceholder', $this->configuration['placeholder']) &&
+            $this->configuration['placeholder']['enableTcaTypePlaceholder'];
+    }
+
+    public function isRtePluginEnabled(): bool
+    {
+        return array_key_exists('enableRtePlugin', $this->configuration['placeholder']) &&
+            $this->configuration['placeholder']['enableRtePlugin'];
+    }
+
+    private function setPlaceholderConfiguration(): array
+    {
+        try {
+            $configurationFile = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(
+                'placeholder',
+                'configurationFile'
+            );
+
+            $configuration = GeneralUtility::makeInstance(YamlFileLoader::class)->load($configurationFile);
+
+            if (!array_key_exists('placeholder', $configuration)) {
+                $this->logger->error('Placeholder configuration is missing placeholder key');
+                return [];
+            }
+
+            return $configuration;
+        } catch (ExtensionConfigurationExtensionNotConfiguredException $e) {
+            $this->logger->error(
+                'No extension configuration for extension placeholder found'
+            );
+        } catch (ExtensionConfigurationPathDoesNotExistException $e) {
+            $this->logger->error(
+                'Extension path for placeholder not found'
+            );
         }
 
         return [];

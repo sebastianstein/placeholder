@@ -1,4 +1,6 @@
 placeholder:
+  enableTcaTypePlaceholder: 1
+  enableRtePlugin: 0
   ckEditorPreset: placeholder
   fieldConfiguration:
     tt_content:
@@ -8,6 +10,6 @@ placeholder:
         - bodytext
       text:
         - header
-    tx_in2studyfinder_domain_model_studycourse:
-      - title
-      - alternate
+#    tx_in2studyfinder_domain_model_studycourse:
+#      - title
+#      - alternate

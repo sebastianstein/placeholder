@@ -15,13 +15,13 @@ class TcaCompilation implements LoggerAwareInterface
     use LoggerAwareTrait;
 
     /**
-     * @var array
+     * @var PlaceholderConfigurationUtility
      */
-    protected $placeholderConfigurationUtility;
+    protected $configurationUtility;
 
     public function __construct()
     {
-        $this->placeholderConfigurationUtility =
+        $this->configurationUtility =
             GeneralUtility::makeInstance(PlaceholderConfigurationUtility::class);
     }
 
@@ -34,7 +34,7 @@ class TcaCompilation implements LoggerAwareInterface
         $tca = $event->getTca();
 
         foreach (
-            $this->placeholderConfigurationUtility->getPlaceholderFieldConfiguration() as $table => $configuration
+            $this->configurationUtility->getPlaceholderFieldConfiguration() as $table => $configuration
         ) {
             if (array_key_exists($table, $tca)) {
                 foreach ($configuration as $tcaType => $value) {
@@ -57,30 +57,34 @@ class TcaCompilation implements LoggerAwareInterface
 
     private function updateTcaField(string $field, string $table, &$tca, $tcaType = null): void
     {
-
         if (array_key_exists($field, $tca[$table]['columns'])) {
             $type = $tca[$table]['columns'][$field]['config']['type'];
 
             switch ($type) {
                 case 'text':
-                    if ($tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['enableRichtext'] ||
-                        $tca[$table]['columns'][$field]['config']['enableRichtext']) {
-                        // RTE
-                           $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['richtextConfiguration'] = $this->placeholderConfigurationUtility->getCkEditorPreset();
-                    } else {
-                        // Textarea
+                    if ($this->configurationUtility->isRtePluginEnabled()) {
+                        if ($tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['enableRichtext'] ||
+                            $tca[$table]['columns'][$field]['config']['enableRichtext']) {
+                            // RTE
+                            $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['richtextConfiguration'] =
+                                $this->configurationUtility->getCkEditorPreset();
+                        } else {
+                            // Textarea
+                        }
                     }
                     break;
                 case 'input':
-                    if (!is_null($tcaType)) {
-                        $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['type'] = 'user';
-                        $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['renderType'] =
-                            'placeholderInput';
-                    } else {
-                        $tca[$table]['columns'][$field]['config']['type'] = 'user';
-                        $tca[$table]['columns'][$field]['config']['renderType'] = 'placeholderInput';
+                    if ($this->configurationUtility->isTcaTypePlaceholderEnabled()) {
+                        if (!is_null($tcaType)) {
+                            $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['type'] = 'user';
+                            $tca[$table]['types'][$tcaType]['columnsOverrides'][$field]['config']['renderType'] =
+                                'placeholderInput';
+                        } else {
+                            $tca[$table]['columns'][$field]['config']['type'] = 'user';
+                            $tca[$table]['columns'][$field]['config']['renderType'] = 'placeholderInput';
+                        }
+                        break;
                     }
-                    break;
                 default:
                     $this->logger->error('wrong TCA type for field ' . $field . ' in table ' . $table);
                     break;
