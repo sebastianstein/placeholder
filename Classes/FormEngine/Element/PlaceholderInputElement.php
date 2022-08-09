@@ -96,12 +96,18 @@ class PlaceholderInputElement extends InputTextElement
         $resultArray = $this->mergeChildReturnIntoExistingResult($resultArray, $fieldWizardResult, false);
         $inputType = 'hidden';
 
+        if (is_array($row['sys_language_uid'])) {
+            $languageUid = $row['sys_language_uid'][0];
+        } else {
+            $languageUid = $row['sys_language_uid'];
+        }
+
         $mainFieldHtml = [];
         $mainFieldHtml[] = '<div class="form-control-wrap" style="max-width: ' . $width . 'px">';
         $mainFieldHtml[] = '<div class="form-wizards-wrap">';
         $mainFieldHtml[] = '<div class="form-wizards-element">';
         $mainFieldHtml[] =
-            '<div class="input-group" data-placeholder-field-id="' . $fieldId . '" data-placeholder-record-language="' . $row['sys_language_uid'][0] . '">';
+            '<div class="input-group" data-placeholder-field-id="' . $fieldId . '" data-placeholder-record-language="' . $languageUid . '">';
         $mainFieldHtml[] = '<div class="placeholder-group">';
         $mainFieldHtml[] = '<div class="placeholder-overlay"></div>';
         $mainFieldHtml[] = '<div class="placeholder-editable"></div>';
