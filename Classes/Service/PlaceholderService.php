@@ -30,7 +30,7 @@ class PlaceholderService implements SingletonInterface, LoggerAwareInterface
 
     public function replacePlaceholder(string &$target): void
     {
-        preg_match_all('/[#]{3}[A-Z0-9]*[#]{3}/', $target, $matches);
+        preg_match_all('/[#]{3}[A-Z0-9\-]*[#]{3}/', $target, $matches);
 
         if (!empty($matches)) {
             $matches = array_unique($matches[0]);
