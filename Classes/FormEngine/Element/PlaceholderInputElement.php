@@ -111,12 +111,6 @@ class PlaceholderInputElement extends InputTextElement
         $mainFieldHtml[] = '<div class="placeholder-group">';
         $mainFieldHtml[] = '<div class="placeholder-overlay"></div>';
         $mainFieldHtml[] = '<div class="placeholder-editable"></div>';
-
-        // @todo this should be configurable. Sadly this option can not be set via the default ckeditor configuration.
-        // Because then the inline initialization is done anyway.
-        // @see https://stackoverflow.com/questions/20073472/why-is-ckeditor-adding-itself-to-divs-where-it-is-not-supposed-to#comment66518085_20073624
-        $mainFieldHtml[] = '<script>window.CKEDITOR.config.disableAutoInline = true;</script>';
-
         $mainFieldHtml[] = '</div>';
         $mainFieldHtml[] =
             '<input type="' . $inputType . '" data-placeholder-input ' . GeneralUtility::implodeAttributes(
