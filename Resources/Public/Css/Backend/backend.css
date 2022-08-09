@@ -42,6 +42,10 @@ div.placeholder-autocomplete-results {
   background: #eee;
 }
 
+.placeholder-group {
+  flex: 1 1 auto;
+}
+
 /* THE OVERLAYING CONTENTEDITABLE WITH TRANSPARENT TEXT */
 .placeholder-group > div:nth-child(2) {
   position: relative;
