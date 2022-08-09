@@ -1,4 +1,4 @@
-define(['jquery', 'TYPO3/CMS/Placeholder/Backend/PlaceholderService'], function($, PlaceholderService) {
+define(['jquery', 'ckeditor', 'TYPO3/CMS/Placeholder/Backend/PlaceholderService'], function($, CKEDITOR, PlaceholderService) {
 
     let PlaceholderElement = {};
 
@@ -68,6 +68,11 @@ define(['jquery', 'TYPO3/CMS/Placeholder/Backend/PlaceholderService'], function(
     }
 
     PlaceholderElement.init = function() {
+        // @todo this should be configurable. Sadly this option can not be set via the default ckeditor configuration.
+        // Because then the inline initialization is done anyway.
+        // @see https://stackoverflow.com/questions/20073472/why-is-ckeditor-adding-itself-to-divs-where-it-is-not-supposed-to#comment66518085_20073624
+        CKEDITOR.config.disableAutoInline = true;
+
         PlaceholderService.init().then(function() {
             // foreach über alle input felder
             $.each(document.querySelectorAll('[data-placeholder-field-id]'), function(index, placeholderContainer) {
