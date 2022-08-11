@@ -39,6 +39,11 @@ class ModifyResultAfterFetchingObjectData implements LoggerAwareInterface
         if ($event->getQuery()->getSource() instanceof Selector) {
             $tableName = $event->getQuery()->getSource()->getSelectorName();
 
+            if ($tableName === 'tt_content') {
+                // tt_content elements are handled with the SebastianStein\Placeholder\DataProcessing\PlaceholderProcessor
+                return;
+            }
+
             if ($this->placeholderConfigurationUtility->existPlaceholderFieldConfigurationKey($tableName)) {
                 $placeholderFields =
                     $this->placeholderConfigurationUtility->getPlaceholderFieldConfigurationByKey($tableName);
