@@ -71,7 +71,7 @@ class MarkerValidationService implements SingletonInterface
     {
         $markerString = substr(substr($marker, 3), 0, -3);
 
-        if (!preg_match('/^[A-Z0-9\-]+$/', $markerString)) {
+        if (!preg_match('/^[A-Z0-9\-+]+$/', $markerString)) {
             $this->addFlashMessageToQueue(
                 LocalizationUtility::translate($this->languageFile . 'error.marker.invalidName.title'),
                 LocalizationUtility::translate($this->languageFile . 'error.marker.invalidName.message')

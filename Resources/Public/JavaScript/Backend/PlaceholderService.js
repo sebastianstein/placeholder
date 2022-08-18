@@ -89,7 +89,7 @@ define(['jquery',], function($) {
      */
     PlaceholderService.highlightPlaceholder = function(placeholderString) {
         //let expr = new RegExp('([#]{3}[A-Z0-9]*[#]{3})([^<])', 'gm');
-        let expr = new RegExp('[#]{3}[A-Z0-9-]*[#]{3}', 'gm');
+        let expr = new RegExp('[#]{3}[A-Z0-9-+]*[#]{3}', 'gm');
 
         if (placeholderString.match(expr)) {
             $.each(placeholderString.match(expr), function(index, element) {
