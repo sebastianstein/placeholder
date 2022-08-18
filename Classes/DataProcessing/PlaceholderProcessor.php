@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace SebastianStein\Placeholder\DataProcessing;
 
 use SebastianStein\Placeholder\Service\PlaceholderService;
-use SebastianStein\Placeholder\Utility\ExtensionConfigurationUtility;
 use SebastianStein\Placeholder\Utility\PlaceholderConfigurationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -50,22 +49,28 @@ class PlaceholderProcessor implements DataProcessorInterface
             if (is_array($tableConfiguration)) {
                 $currentCType = $processedData['data']['CType'];
 
+                // by TCA type
                 if (array_key_exists($currentCType, $tableConfiguration)) {
-                    foreach ($tableConfiguration[$currentCType] as $field) {
-                        if (array_key_exists($field, $processedData['data']) &&
-                            !empty($processedData['data'][$field])) {
-                            $this->placeholderService->replacePlaceholder($processedData['data'][$field]);
-                        } else {
-                            // @todo the given field does not exist in the current record
-                        }
+                    foreach ($tableConfiguration[$currentCType] as $fieldName) {
+                        $this->replaceIfFieldExist($fieldName, $processedData);
+                    }
+                } else {
+                    // by table
+                    foreach ($tableConfiguration as $fieldName) {
+                        $this->replaceIfFieldExist($fieldName, $processedData);
                     }
                 }
-                // subtype
-            } else {
-                // @todo direct
             }
         }
 
         return $processedData;
+    }
+
+    private function replaceIfFieldExist(string $field, array &$processedData)
+    {
+        if (array_key_exists($field, $processedData['data']) &&
+            !empty($processedData['data'][$field])) {
+            $this->placeholderService->replacePlaceholder($processedData['data'][$field]);
+        }
     }
 }

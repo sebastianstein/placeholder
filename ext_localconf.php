@@ -30,7 +30,9 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][\SebastianStein\Placeholder\FormEngine\Evaluation\UniqueMarker::class] =
             '';
 
-        if (\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\SebastianStein\Placeholder\Utility\PlaceholderConfigurationUtility::class)->isRtePluginEnabled()) {
+        if (\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \SebastianStein\Placeholder\Utility\PlaceholderConfigurationUtility::class
+        )->isRtePluginEnabled()) {
             $GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['placeholder'] =
                 'EXT:placeholder/Configuration/Yaml/CkEditor/Placeholder.yaml';
         }

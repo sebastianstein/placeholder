@@ -10,3 +10,12 @@ inn progress:
 look into:
 
 - clearable inputs (.t3js-clearable)
+
+Placeholder in `pages`:
+
+in this case add the placeholder processor to your page dataProcessors
+
+Example:
+    page.10.dataProcessing {
+        141988 = SebastianStein\Placeholder\DataProcessing\PlaceholderProcessor
+    }
