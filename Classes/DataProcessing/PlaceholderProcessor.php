@@ -25,8 +25,8 @@ class PlaceholderProcessor implements DataProcessorInterface
 
     public function __construct()
     {
-       $this->placeholderService = GeneralUtility::makeInstance(PlaceholderService::class);
-       $this->placeholderConfigurationUtility = GeneralUtility::makeInstance(PlaceholderConfigurationUtility::class);
+        $this->placeholderService = GeneralUtility::makeInstance(PlaceholderService::class);
+        $this->placeholderConfigurationUtility = GeneralUtility::makeInstance(PlaceholderConfigurationUtility::class);
     }
 
     /**
@@ -52,7 +52,8 @@ class PlaceholderProcessor implements DataProcessorInterface
 
                 if (array_key_exists($currentCType, $tableConfiguration)) {
                     foreach ($tableConfiguration[$currentCType] as $field) {
-                        if (array_key_exists($field, $processedData['data'])) {
+                        if (array_key_exists($field, $processedData['data']) &&
+                            !empty($processedData['data'][$field])) {
                             $this->placeholderService->replacePlaceholder($processedData['data'][$field]);
                         } else {
                             // @todo the given field does not exist in the current record
