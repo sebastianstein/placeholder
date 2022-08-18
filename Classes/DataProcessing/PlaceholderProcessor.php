@@ -49,13 +49,15 @@ class PlaceholderProcessor implements DataProcessorInterface
             if (is_array($tableConfiguration)) {
                 $currentCType = $processedData['data']['CType'];
 
-                // by TCA type
-                if (array_key_exists($currentCType, $tableConfiguration)) {
-                    foreach ($tableConfiguration[$currentCType] as $fieldName) {
-                        $this->replaceIfFieldExist($fieldName, $processedData);
+                if (!empty($currentCType)) {
+                    // TCA type mode
+                    if (array_key_exists($currentCType, $tableConfiguration)) {
+                        foreach ($tableConfiguration[$currentCType] as $fieldName) {
+                            $this->replaceIfFieldExist($fieldName, $processedData);
+                        }
                     }
                 } else {
-                    // by table
+                    // Table mode
                     foreach ($tableConfiguration as $fieldName) {
                         $this->replaceIfFieldExist($fieldName, $processedData);
                     }
