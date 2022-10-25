@@ -83,8 +83,8 @@ class TcaCompilation implements LoggerAwareInterface
                             $tca[$table]['columns'][$field]['config']['type'] = 'user';
                             $tca[$table]['columns'][$field]['config']['renderType'] = 'placeholderInput';
                         }
-                        break;
                     }
+                    break;
                 default:
                     $this->logger->error('wrong TCA type for field ' . $field . ' in table ' . $table);
                     break;
